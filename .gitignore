@@ -6,3 +6,6 @@ npm-debug.log*
 dist/
 lib/
 .tmp/
+
+# CI workflow pushed separately once gh has workflow scope
+.github/workflows/
