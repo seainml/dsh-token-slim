@@ -27,12 +27,12 @@ export class NoiseFilter extends Service {
       .array(z.string())
       .default(COMMAND_CLASSES.map((cls) => cls.id)),
     /** Minimum raw text length before a rewrite is considered. */
-    minChars: z.number().integer().min(0).default(2000),
+    minChars: z.number().step(1).min(0).default(2000),
     /** Minimum character savings for a rewrite to be applied. */
-    minSavingsChars: z.number().integer().min(0).default(500),
+    minSavingsChars: z.number().step(1).min(0).default(500),
     /** Head/tail retention for ambiguous lines. */
-    headLines: z.number().integer().min(0).default(10),
-    tailLines: z.number().integer().min(0).default(10),
+    headLines: z.number().step(1).min(0).default(10),
+    tailLines: z.number().step(1).min(0).default(10),
     /** Marker appended to rewritten output. */
     marker: z.string().default(DEFAULT_MARKER),
     /** Extra keep patterns (regex source strings), appended to the defaults. */

@@ -21,15 +21,15 @@ export class ContextAudit extends Service {
 
   static Config = z.object({
     /** Assumed model context limit used to compute pressure percentages. */
-    contextLimitTokens: z.number().integer().min(1).default(200_000),
+    contextLimitTokens: z.number().step(1).min(1).default(200_000),
     /** How many top offender nodes the report lists. */
-    topOffenders: z.number().integer().min(1).max(50).default(8),
+    topOffenders: z.number().step(1).min(1).max(50).default(8),
     /** Name of the registered model tool. */
     toolName: z.string().default('token_audit'),
     /** Track `compaction/summary` events and report cumulative savings. */
     trackCompaction: z.boolean().default(true),
     /** Cap on the retained in-memory compaction history. */
-    maxCompactionHistory: z.number().integer().min(0).default(10),
+    maxCompactionHistory: z.number().step(1).min(0).default(10),
   })
 
   /**

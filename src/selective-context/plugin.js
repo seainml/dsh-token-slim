@@ -24,15 +24,15 @@ export class SelectiveContext extends Service {
     /** Master switch; the plugin does nothing until this is true. */
     enabled: z.boolean().default(false),
     /** Projected surface (tokens) above which filtering is considered. */
-    pressureThresholdTokens: z.number().integer().min(1).default(150_000),
+    pressureThresholdTokens: z.number().step(1).min(1).default(150_000),
     /** Only tool results above this size may be dropped. */
-    minTokens: z.number().integer().min(0).default(2000),
+    minTokens: z.number().step(1).min(0).default(2000),
     /** Only tool results older than this many turns may be dropped. */
-    minAgeTurns: z.number().integer().min(0).default(3),
+    minAgeTurns: z.number().step(1).min(0).default(3),
     /** Minimum fraction of noise-class lines for a result to be droppable. */
     noiseRatioThreshold: z.number().min(0).max(1).default(0.95),
     /** Cap on how many messages one step may drop. */
-    maxDropPerStep: z.number().integer().min(1).default(2),
+    maxDropPerStep: z.number().step(1).min(1).default(2),
   })
 
   /**
