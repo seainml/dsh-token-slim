@@ -1,0 +1,60 @@
+{
+  "name": "dsh-token-slim",
+  "version": "0.1.0",
+  "description": "Token optimization plugin suite for DeepSeek Harness (DSH): noise-filter, context-audit, selective-context.",
+  "type": "module",
+  "license": "MIT",
+  "author": "seainml",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "plugin",
+    "token",
+    "context",
+    "optimization",
+    "compaction",
+    "claude-code"
+  ],
+  "exports": {
+    "./noise-filter": "./src/noise-filter/plugin.js",
+    "./context-audit": "./src/context-audit/plugin.js",
+    "./selective-context": "./src/selective-context/plugin.js",
+    "./lib/lines": "./src/lib/lines.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "docs",
+    "compositions",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test 'src/**/*.test.js'"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seainml/dsh-token-slim.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seainml/dsh-token-slim/issues"
+  },
+  "homepage": "https://github.com/seainml/dsh-token-slim#readme"
+}

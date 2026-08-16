@@ -1,0 +1,47 @@
+# Example composition rows for dsh-token-slim
+
+Add these rows to a DSH `cordis.yml` (host composition or an agent preset).
+None of the three plugins publishes a service, so they sit loose in the
+composition — do NOT wrap them in an `isolate` realm group unless the host
+services they consume (`tools`, `tokenMeter`) are in that same group.
+
+```yaml
+# --- token optimization suite -------------------------------------------
+# Reference: https://github.com/seainml/dsh-token-slim
+
+# 1) Compress noisy command outputs (test runners, build tools, git, listing)
+#    before they enter the conversation context.
+- id: noise-filter
+  name: dsh-token-slim/noise-filter
+  config:
+    minChars: 2000          # only consider results above this size
+    minSavingsChars: 500    # only rewrite when at least this much is saved
+    headLines: 10           # ambiguous-line head/tail retention
+    tailLines: 10
+    enableClasses:          # command classes to filter
+      - test
+      - build
+      - git
+      - list
+
+# 2) Context health audit: model tool `token_audit` + compaction savings.
+- id: context-audit
+  name: dsh-token-slim/context-audit
+  config:
+    contextLimitTokens: 200000   # pressure percent denominator
+    topOffenders: 8
+    toolName: token_audit
+    trackCompaction: true
+
+# 3) Selective context retention (EXPERIMENTAL — keep disabled until validated).
+- id: selective-context
+  name: dsh-token-slim/selective-context
+  disabled: true
+  config:
+    enabled: false               # master switch; must be true to do anything
+    pressureThresholdTokens: 150000
+    minTokens: 2000
+    minAgeTurns: 3
+    noiseRatioThreshold: 0.95
+    maxDropPerStep: 2
+```
