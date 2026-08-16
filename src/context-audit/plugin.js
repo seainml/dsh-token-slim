@@ -91,7 +91,7 @@ export class ContextAudit extends Service {
           properties: {
             totalTokens: { type: 'number' },
             surfaceTokens: { type: 'number' },
-            pressurePercent: { type: ['number', 'null'] },
+            pressurePercent: { type: 'number' },
             contextLimitTokens: { type: 'number' },
             turns: { type: 'number' },
             topOffenders: {
@@ -123,7 +123,8 @@ export class ContextAudit extends Service {
                 properties: {
                   kind: { type: 'string' },
                   reason: { type: 'string' },
-                  estimatedSavingsTokens: { type: ['number', 'null'] },
+                  // Optional: omitted entirely when no estimate exists.
+                  estimatedSavingsTokens: { type: 'number' },
                 },
                 required: ['kind', 'reason'],
                 additionalProperties: false,
@@ -156,9 +157,7 @@ export class ContextAudit extends Service {
   async executeAudit(exec) {
     const agent = exec.agent
     if (agent === undefined) {
-      return {
-        error: 'token_audit: no owning agent on this execution.',
-      }
+      throw new Error('token_audit: no owning agent on this execution.')
     }
     const measurement = this.ctx.tokenMeter.measure(agent.session)
     return buildAuditReport(

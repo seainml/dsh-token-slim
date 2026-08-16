@@ -114,7 +114,7 @@ export function buildSuggestions(input) {
     suggestions.push({
       kind: 'clear',
       reason: `This session has ${turns} turns; every turn re-reads the whole history. Start a fresh session for the next independent task.`,
-      estimatedSavingsTokens: pressurePercent === null ? undefined : Math.round(totalTokens * 0.5),
+      estimatedSavingsTokens: Math.round(totalTokens * 0.5),
     })
   }
 

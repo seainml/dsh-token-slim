@@ -90,8 +90,7 @@ result below `minChars` / `minSavingsChars` is never touched.
 
 ### context-audit
 
-Registers a model-visible tool `token_audit` and a `/token-audit`-style command
-surface. Reading `tokenMeter.measure(session)` it reports:
+Registers a model-visible tool `token_audit`. Reading `tokenMeter.measure(session)` it reports:
 
 - total / surface token counts and pressure percent against a configured limit;
 - the largest tool-result offenders (seq, tokens, % of surface);
